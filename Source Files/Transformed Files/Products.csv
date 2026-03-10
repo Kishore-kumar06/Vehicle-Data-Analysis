@@ -1,0 +1,17 @@
+Product_Id,Product,Category,Is Fuel,Is Service
+1,Petrol,Fuel,Yes,No
+2,Helmet,Safety Gear,No,No
+3,Puncher,Service,No,Yes
+4,Service,Service,No,Yes
+5,Insurance,Insurance,No,No
+6,Polish,Maintenance,No,No
+7,Water Wash,Maintenance,No,Yes
+8,Air filter,Accessories,No,No
+9,Sparkplug,Accessories,No,No
+10,Tyres,Accessories,No,No
+11,Clutch Repair,Service,No,Yes
+12,Helmet cap,Accessories,No,No
+13,Battery,Accessories,No,No
+14,Battery Recharge,Service,No,Yes
+15,One way bolt,Accessories,No,No
+16,Break pads,Accessories,No,No
