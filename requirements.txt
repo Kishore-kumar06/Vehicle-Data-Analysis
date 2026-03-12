@@ -1,2 +1,5 @@
 pandas
-MySQL.connector
+mysql.connector
+os
+tkinter
+sqlite3

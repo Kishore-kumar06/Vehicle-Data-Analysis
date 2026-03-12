@@ -1,4 +1,4 @@
-Product_Id,Product,Category,Is Fuel,Is Service
+Product_Id,Product Name,Category,Is Fuel,Is Service
 1,Petrol,Fuel,Yes,No
 2,Helmet,Safety Gear,No,No
 3,Puncher,Service,No,Yes

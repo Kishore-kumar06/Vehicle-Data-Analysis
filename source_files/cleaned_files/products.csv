@@ -1,17 +1,17 @@
-product_id,product,category,is_fuel,is_service
-1,Petrol,Fuel,Yes,No
-2,Helmet,Safety Gear,No,No
-3,Puncher,Service,No,Yes
-4,General Service,Service,No,Yes
-5,Icici Insurance,Motor Insurance,No,No
-6,Polish,Maintenance,No,No
-7,Water Wash,Maintenance,No,Yes
-8,Air Filter,Accessories,No,No
-9,Sparkplug,Accessories,No,No
-10,Tyres,Accessories,No,No
-11,Clutch Repair,Service,No,Yes
-12,Helmet Cap,Accessories,No,No
-13,Battery,Accessories,No,No
-14,Battery Recharge,Service,No,Yes
-15,One Way Bolt,Accessories,No,No
-16,Break Pads,Accessories,No,No
+product_id,product_name,category,is_fuel,is_service
+1,Petrol,Fuel,1,0
+2,Helmet,Safety Gear,0,0
+3,Puncher,Service,0,1
+4,General Service,Service,0,1
+5,ICICI Insurance,motor insurance,0,0
+6,Polish,Maintenance,0,0
+7,Water Wash,Maintenance,0,1
+8,Air filter,Accessories,0,0
+9,Sparkplug,Accessories,0,0
+10,Tyres,Accessories,0,0
+11,Clutch Repair,Service,0,1
+12,Helmet cap,Accessories,0,0
+13,Battery,Accessories,0,0
+14,Battery Recharge,Service,0,1
+15,One way bolt,Accessories,0,0
+16,Break pads,Accessories,0,0

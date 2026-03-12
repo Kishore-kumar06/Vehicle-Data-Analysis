@@ -1,4 +1,4 @@
-Transaction_Id,User_Id,Vehical_Id,Location_Id,Product_Id,Price,Quantity,Total Cost,Transaction Date
+Transaction_Id,User_Id,Vehicle_Id,Location_Id,Product_Id,Price,Quantity,Total Cost,Transaction Date
 1,1,1,1,1,83.04,1.01,84,21-08-2020
 2,1,1,1,1,83.04,1.01,84,25-08-2020
 3,1,1,3,2,900,1,900,25-08-2020

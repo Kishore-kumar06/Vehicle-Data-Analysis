@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 
-
 def get_transformed_files(curr_path):
     try:
         transformed_files_path = os.path.join(curr_path, 'source_files', 'transformed_files')
@@ -14,22 +13,27 @@ def get_transformed_files(curr_path):
         print(f"An error occurred while fetching transformed files: {er}")
 
 
-def clean_column_names(df):
+def clean_dataframe(df):
     df.columns = (
         df.columns.str.strip()
                   .str.lower()
                   .str.replace(" ", "_")
                   .str.replace(r"[^\w]", "", regex=True)
     )
-    return df
 
-
-def clean_string_values(df):
     for col in df.select_dtypes(include="object").columns:
-        df[col] = df[col].astype(str).str.strip()
-        df[col] = df[col].str.title()
+        df[col] = df[col].str.strip()
+        df[col] = df[col].replace({"Yes": 1, "YES": 1, "No": 0, "NO": 0})
         df[col] = df[col].replace({"": pd.NA, "nan": pd.NA, "None": pd.NA})
+
+        if "date" in col.lower():
+            df[col] = pd.to_datetime(df[col], format="%d-%m-%Y", errors="coerce")
+            df[col] = df[col].dt.strftime("%Y-%m-%d")
+
+    df = df.drop_duplicates().reset_index(drop=True)
+    df = df.dropna()
     return df
+
 
 
 def clean_data(input_file, output_folder):
@@ -38,21 +42,8 @@ def clean_data(input_file, output_folder):
 
         df = pd.read_csv(input_file, encoding="utf-8", low_memory=False)
 
-        # Standardize column names
-        df = clean_column_names(df)
-
-        # Clean string columns
-        df = clean_string_values(df)
-
-        # Remove duplicate rows
-        df = df.drop_duplicates()
-
-        # Drop fully empty rows
-        df = df.dropna(how="all")
-
-        # Optional: reset index
-        df = df.reset_index(drop=True)
-
+        df = clean_dataframe(df)
+        
         # Create output folder if not exists
         os.makedirs(output_folder, exist_ok=True)
 
@@ -64,3 +55,18 @@ def clean_data(input_file, output_folder):
     except Exception as ex:
         print(f"An error occurred while cleaning data in {input_file}: {ex}")
 
+
+def fetch_data_for_uploads(file):
+    try:
+        data = pd.read_csv(file, encoding='UTF-8', index_col=False)
+        table_name = os.path.basename(file).split('.')[0]
+
+        if len(data.columns[0]) > 0:
+            column = data.columns.to_list()
+            column_names = ', '.join(column)
+            place_holders = ', '.join(["%s"] * len(column))
+
+            return data, table_name, column_names, place_holders
+
+    except Exception as ex:
+        print(f"An error occurred while fetching cleaned data for {file}: {ex}")
