@@ -1,40 +1,45 @@
-import os
-from src.data_operations.data_processing import get_transformed_files, clean_data, fetch_data_for_uploads
-from src.data_operations.file_operation import select_file
-from src.crud_operations.database_operation import insert_records
+"""
+main.py
+-------
+Run this file to execute the full pipeline:
+  Step 1 - Create database tables
+  Step 2 - Load and clean the CSV files
+  Step 3 - Upload data to MySQL
+  Step 4 - Verify the upload
 
+Usage:
+    python main.py
+"""
 
-def cleanning_data():
-    try:
-        curr_path = os.getcwd()
-        output_folder = os.path.join(curr_path, "source_files", "cleaned_files")
-
-        for file in get_transformed_files(curr_path):
-            clean_data(file, output_folder)
-    except Exception as ex:
-        print(f"An error ocured while cleaning data.")
-
-def upload_data():
-    try:
-        file_path = select_file()
-
-        if file_path != '' or file_path is not None:
-            data, table_name, column_names, place_holders =  fetch_data_for_uploads(file_path)
-
-            insert_records(data, name=table_name, column_names=column_names, place_holders=place_holders)
-        else:
-            print(f'Selected file path is none')
-       
-    except Exception as ex:
-        print(f"An error ocured while uploading data.")
+from src.config import CLEANED_DATA_FOLDER, TABLE_UPLOAD_ORDER
+from src.create_tables import create_all_tables
+from src.data_cleaner import load_all_tables
+from src.data_uploader import upload_table
 
 
 def main():
-    # cleanning_data()
-    upload_data()
-    
-    
+    print("=" * 45)
+    print("  Vehicle Expense Analytics — Pipeline")
+    print("=" * 45)
+
+    # Step 1: Create tables
+    print("\nStep 1: Creating tables...")
+    create_all_tables()
+
+    # Step 2: Load and clean CSVs
+    print("\nStep 2: Loading cleaned CSV files...")
+    tables = load_all_tables(CLEANED_DATA_FOLDER)
+
+    # Step 3: Upload in FK-safe order
+    print("\nStep 3: Uploading data to MySQL...")
+    for table_name in TABLE_UPLOAD_ORDER:
+        if table_name in tables:
+            upload_table(tables[table_name], table_name)
+        else:
+            print(f"  Warning: No CSV found for '{table_name}', skipping.")
+
+    print("\nDone!")
+
 
 if __name__ == "__main__":
     main()
-    
