@@ -11,10 +11,11 @@ Usage:
     python main.py
 """
 
-from src.config import CLEANED_DATA_FOLDER, TABLE_UPLOAD_ORDER
+# from src.config import CLEANED_DATA_FOLDER, TABLE_UPLOAD_ORDER
 from src.create_tables import create_all_tables
 from src.data_cleaner import load_all_tables
 from src.data_uploader import upload_table
+from src.db_config import Data_Cred
 
 
 def main():
@@ -28,11 +29,11 @@ def main():
 
     # Step 2: Load and clean CSVs
     print("\nStep 2: Loading cleaned CSV files...")
-    tables = load_all_tables(CLEANED_DATA_FOLDER)
+    tables = load_all_tables(Data_Cred.cleaned_data_folder)
 
     # Step 3: Upload in FK-safe order
     print("\nStep 3: Uploading data to MySQL...")
-    for table_name in TABLE_UPLOAD_ORDER:
+    for table_name in Data_Cred.table_upload_order:
         if table_name in tables:
             upload_table(tables[table_name], table_name)
         else:

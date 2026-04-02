@@ -1,15 +1,15 @@
 import mysql.connector
-from src.config import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, AUTH_PLUGIN
-
+from src.db_config import Data_Cred
 
 def get_connection():
     """Return an open MySQL connection."""
+
     connection = mysql.connector.connect(
-        host=DB_HOST,
-        port=DB_PORT,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        database=DB_NAME,
-        auth_plugin=AUTH_PLUGIN
+        host=Data_Cred.DB_HOST,
+        port=Data_Cred.DB_PORT,
+        user=Data_Cred.DB_USER,
+        password=Data_Cred.DB_PASSWORD,
+        database=Data_Cred.DB_NAME,
+        auth_plugin=Data_Cred.AUTH_PLUGIN
     )
     return connection

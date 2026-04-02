@@ -61,13 +61,14 @@ create table transactions (
 
 SET SQL_SAFE_UPDATES = 0;
 
-# modifying tables tablenames or columns
+# modifying schemas and columns
+
 # alter table locations rename column pincode to pin_code;
 # alter table fuel_price_history modify column fuel_price decimal(8,2);
 # alter table transactions rename column tranaction_id to transaction_id;
-# alter table transactions modify column price decimal(8,2);
-# alter table transactions modify column quantity decimal(8,2);
-# alter table transactions modify column total_cost decimal(8,2);
+# alter table transactions modify column price decimal(10,2);
+# alter table transactions modify column quantity decimal(10,2);
+# alter table transactions modify column total_cost decimal(10,2);
 
 # alter table vehicle_expense_analytics.users add column modified_date datetime default current_timestamp on update current_timestamp;
 # alter table vehicle_expense_analytics.vehicles add column modified_date datetime default current_timestamp on update current_timestamp;
@@ -80,6 +81,7 @@ SET SQL_SAFE_UPDATES = 0;
 # desc vehicle_expense_analytics.users;
 # alter table vehicle_expense_analytics.locations rename column address to locality;
 # alter table vehicle_expense_analytics.products add column brand varchar(100) after product_name;
+# alter table vehicle_expense_analytics.vehicles add column vehicle_cost int after engine_cc;
 
 # verifying uploaded data
 SELECT * FROM vehicle_expense_analytics.users;
@@ -115,6 +117,7 @@ select * from vehicle_expense_analytics.transactions where price < 0 or quantity
 # Insert into vehicle_expense_analytics.products (product_id, product_name, brand, category, is_fuel, is_service) values (17, 'Half Face Helmet','Vega', 'Safety Gear',0,0), (18, 'Skull Cap Helmet',null, 'Safety Gear',0,0);
 # update vehicle_expense_analytics.transactions set product_id = 18 where transaction_id = 21;
 # update vehicle_expense_analytics.transactions set product_id = 17 where transaction_id = 3;
+# update vehicle_expense_analytics.vehicles set vehicle_cost = 100850 where vehicle_id = 1;
 
 
 # backup
@@ -125,18 +128,5 @@ create index idx_transaction_id on vehicle_expense_analytics.transactions(transa
 create index idx_transaction_date on vehicle_expense_analytics.transactions(transaction_date);
 create index idx_transaction_total_cost on vehicle_expense_analytics.transactions(total_cost);
 
-
-# create important view
-
-create view v_bike_expenses_metrics as (
-select t.transaction_date,  v.vehicle_model, l.location_name, l.locality, l.city, l.state, l.pin_code, p.product_name, p.brand, p.category, p.is_fuel, t.price, t.quantity, t.total_cost 
-from vehicle_expense_analytics.transactions t 
-left join vehicle_expense_analytics.users u on t.transaction_id = u.user_id
-left join vehicle_expense_analytics.vehicles v on t.vehicle_id = v.vehicle_id
-left join vehicle_expense_analytics.locations l on t.location_id = l.location_id
-left join vehicle_expense_analytics.products p on t.product_id = p.product_id);
-
-# drop view v_bike_expenses_metrics;
-select * from v_bike_expenses_metrics;
 
 # create quick access store procesures
