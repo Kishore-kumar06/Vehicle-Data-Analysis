@@ -25,8 +25,9 @@ p.is_fuel,
 t.price, 
 t.quantity, 
 t.total_cost,
-sum(t.total_cost) over(order by t.transaction_id) as cum_total_cost,
-sum(case when p.is_fuel = 1 then t.quantity else 0 end) over(order by t.transaction_id) as cum_fuel_quantity
+sum(t.total_cost) over(order by t.transaction_id) as cum_cost,
+sum(case when p.is_fuel = 1 then t.quantity else 0 end) over(order by t.transaction_id) as cum_fuel_quantity,
+round((sum(t.total_cost) over(order by transaction_id) / v.vehicle_cost) * 100,2) as expense_pct_of_total_bike_cost
 from vehicle_expense_analytics.transactions t 
 left join vehicle_expense_analytics.users u on t.transaction_id = u.user_id
 left join vehicle_expense_analytics.vehicles v on t.vehicle_id = v.vehicle_id

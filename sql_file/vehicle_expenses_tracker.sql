@@ -1,5 +1,5 @@
 # creating database
-create database vehicle_expense_analytics;
+create database vehicle_expense_analytics_db;
 
 # database validations
 show databases;
@@ -119,7 +119,6 @@ select * from vehicle_expense_analytics.transactions where price < 0 or quantity
 # update vehicle_expense_analytics.transactions set product_id = 17 where transaction_id = 3;
 # update vehicle_expense_analytics.vehicles set vehicle_cost = 100850 where vehicle_id = 1;
 
-
 # backup
 # mysqldump -h localhost -u root -p vehicle_expense_analytics > D:\Project\Vehicle-Data-Analysis\database_backup\vehicle_expense_analytics.sql
 
@@ -127,6 +126,5 @@ select * from vehicle_expense_analytics.transactions where price < 0 or quantity
 create index idx_transaction_id on vehicle_expense_analytics.transactions(transaction_id);
 create index idx_transaction_date on vehicle_expense_analytics.transactions(transaction_date);
 create index idx_transaction_total_cost on vehicle_expense_analytics.transactions(total_cost);
-
 
 # create quick access store procesures
