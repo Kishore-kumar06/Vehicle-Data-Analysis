@@ -13,6 +13,9 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Sensitive — never commit these
 *.env
 config_local.py
+
+# SQL
+/database_backup
+/sql_file
