@@ -103,5 +103,3 @@ Page 5 — Year-on-Year
 - Actual mileage: 35.8 km/L vs ARAI rated 45.5 km/L
 - 99% of fuel purchases at a single station (Bharath Petroleum, Bangalore)
 
-![Uploading vehicle_expenses_analytics_fuel_page.jpg…]()
-
