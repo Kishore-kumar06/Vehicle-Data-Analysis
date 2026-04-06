@@ -33,7 +33,7 @@ def main():
 
     # Step 3: Upload in FK-safe order
     print("\nStep 3: Uploading data to MySQL...")
-    for table_name in Data_Cred.table_upload_order:
+    for table_name in Data_Cred.table_upload_order.split(","):
         if table_name in tables:
             upload_table(tables[table_name], table_name)
         else:
