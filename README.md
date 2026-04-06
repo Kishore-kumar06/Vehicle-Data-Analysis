@@ -1,10 +1,10 @@
 # Vehicle Expense Analytics
 
-A personal project to track and analyse 5+ years of bike expenses using Python, MySQL, and Power BI.
+End-to-end personal vehicle expense analytics system — from raw Excel data to interactive Power BI dashboard. Tracks 5+ years of bike expenses (Aug 2020 – Mar 2026) for a TVS NTorq 125 across 259 fuel refills and 16 expense categories.
 
 ## What it does
 
-Loads cleaned expense data (fuel, maintenance, accessories) into a MySQL database and generates an interactive Power BI dashboard for analysis.
+Transformed Raw data by Normalizing the columns and creating Data Model useing Star Schema that Loads cleaned expense data (fuel, maintenance, accessories) into a MySQL database and generates an interactive Power BI dashboard for analysis.
 
 ## Tech Stack
 
@@ -14,6 +14,7 @@ Loads cleaned expense data (fuel, maintenance, accessories) into a MySQL databas
 | pandas     | Reading and cleaning CSV files |
 | MySQL      | Storing the data               |
 | Power BI   | Dashboard and visualisation    |
+| Excel      | Tracking Data                  |
 
 ## Project Structure
 
@@ -21,13 +22,19 @@ Loads cleaned expense data (fuel, maintenance, accessories) into a MySQL databas
 vehicle-analysis/
 ├── data/
 │   └── cleaned/          # cleaned CSV files (6 tables)
+├── powerbi/
+|   └── latest_dashboard/
+|             └── screenshots/
+|    ├── vehicle_expenses_analytics.pbix
+|    └── old_dashboard/
+|             └── screenshots/
+|    ├── bike_analytics.pbix
 ├── src/
-│   ├── config.py         # DB credentials and settings
+│   ├── db_config.py      # DB credentials and settings
 │   ├── db_connection.py  # MySQL connection helper
 │   ├── create_tables.py  # CREATE TABLE statements
 │   ├── data_cleaner.py   # pandas cleaning functions
 │   ├── data_uploader.py  # inserts data into MySQL
-│   └── db_verifier.py    # post-upload checks
 ├── main.py               # run this to execute the pipeline
 ├── requirements.txt
 └── README.md
@@ -80,16 +87,21 @@ Step 3: Uploading data to MySQL...
   transactions: 200 new rows inserted (total in DB: 200)
   ...
 
-Step 4: Verifying upload...
-  transactions          200 rows   [OK]
-  Total spend: Rs. 1,48,276.00
-  Total fuel:  Rs. 61,785.00
-```
+## PowerBi Dashboard Pages
+
+Page 1 — Executive Overview
+Page 2 — Fuel Analysis
+Page 3 — Maintenance & Service
+Page 4 — Location Insights
+Page 5 — Year-on-Year
 
 ## Key Findings
 
-- Total spend over 5 years: **₹1,48,276**
-- Fuel cost: ₹61,785 (41.7%) — Maintenance: ₹86,491 (58.3%)
+- Total spend over 5 years: **₹82,691**
+- Fuel cost: ₹58,985 — Maintenance: ₹23,706
 - Petrol prices rose from ₹83 (2020) to ₹113 (2021 peak)
-- Actual mileage: 35.8 km/L vs ARAI rated 40 km/L
+- Actual mileage: 35.8 km/L vs ARAI rated 45.5 km/L
 - 99% of fuel purchases at a single station (Bharath Petroleum, Bangalore)
+
+![Uploading vehicle_expenses_analytics_fuel_page.jpg…]()
+
