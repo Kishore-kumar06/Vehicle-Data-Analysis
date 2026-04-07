@@ -1,17 +1,18 @@
 # Vehicle Expense Analytics
 
-End-to-end personal vehicle expense analytics system — from raw Excel data to interactive Power BI dashboard. Tracks 5+ years of bike expenses (Aug 2020 – Mar 2026) for a TVS NTorq 125 across 259 fuel refills and 16 expense categories.
+End-to-end personal vehicle expense analytics system—from raw Excel data to interactive Power BI dashboard. Tracks 5+ years of bike expenses (Aug 2020 – Dec 2025) for a TVS NTorq 125 that describes the expenses that occurred for the vehicle during the provided period.
 
-## What it does
 
-Transformed Raw data by Normalizing the columns and creating Data Model useing Star Schema that Loads cleaned expense data (fuel, maintenance, accessories) into a MySQL database and generates an interactive Power BI dashboard for analysis.
+## Course of Action
+
+Recorded each transaction, such as fuel, maintenance, accessories, and further metrics, in the Excel sheet in a raw format, each per date. Further transformed the raw data by normalizing the columns and creating a data model using a star schema and by using Python (Pandas and mysql.connector libraries) that loads cleaned expense data (fuel, maintenance, and accessories) into a MySQL database and generates an interactive Power BI dashboard for analysis.
 
 ## Tech Stack
 
 | Tool       | Purpose                        |
 |------------|--------------------------------|
 | Python     | Data cleaning & DB upload      |
-| pandas     | Reading and cleaning CSV files |
+| Pandas     | Reading and cleaning CSV files |
 | MySQL      | Storing the data               |
 | Power BI   | Dashboard and visualisation    |
 | Excel      | Tracking Data                  |
@@ -21,13 +22,13 @@ Transformed Raw data by Normalizing the columns and creating Data Model useing S
 ```
 vehicle-analysis/
 ├── data/
-│   └── cleaned/          # cleaned CSV files (6 tables)
+│   └── cleaned/ # cleaned CSV files (6 tables)
 ├── powerbi/
 |   └── latest_dashboard/
-|             └── screenshots/
-|    ├── vehicle_expenses_analytics.pbix
-|    └── old_dashboard/
-|             └── screenshots/
+|       └── screenshots/
+|   ├── vehicle_expenses_analytics.pbix
+|   └── old_dashboard/
+|       └── screenshots/
 |    ├── bike_analytics.pbix
 ├── src/
 │   ├── db_config.py      # DB credentials and settings
@@ -64,7 +65,7 @@ fuel_price_history (standalone)
    CREATE DATABASE vehicle_expense_db;
    ```
 
-3. Update your credentials in `src/config.py`
+3. Update the credentials in `src/config.py`
 
 4. Run the pipeline:
    ```bash
@@ -103,3 +104,6 @@ Page 5 — Year-on-Year
 - Actual mileage: 35.8 km/L vs ARAI rated 45.5 km/L
 - 99% of fuel purchases at a single station (Bharath Petroleum, Bangalore)
 
+
+## Note: 
+- Power BI Dashboards are under upgradation.
