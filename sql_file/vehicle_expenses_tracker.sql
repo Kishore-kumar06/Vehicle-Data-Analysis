@@ -59,6 +59,13 @@ create table transactions (
     transaction_date date
 );
 
+create table payment_mode(
+	payment_id int primary key,
+    payment varchar(50) Not Null
+);
+
+Insert Into payment_mode (payment_id, payment) Values (1, "Google Pay"), (2, "PhonePe"), (3, "Paytm"), (4, "Cash"), (5, "Debit Card"), (6, "Amazon Pay");
+
 SET SQL_SAFE_UPDATES = 0;
 
 # modifying schemas and columns
@@ -82,6 +89,8 @@ SET SQL_SAFE_UPDATES = 0;
 # alter table vehicle_expense_analytics.locations rename column address to locality;
 # alter table vehicle_expense_analytics.products add column brand varchar(100) after product_name;
 # alter table vehicle_expense_analytics.vehicles add column vehicle_cost int after engine_cc;
+# alter table vehicle_expense_analytics.transactions add column payment_id int after product_id;
+# alter table vehicle_expense_analytics.transactions add foreign key (payment_id) references payment_mode(payment_id);
 
 # verifying uploaded data
 SELECT * FROM vehicle_expense_analytics.users;
@@ -118,6 +127,7 @@ select * from vehicle_expense_analytics.transactions where price < 0 or quantity
 # update vehicle_expense_analytics.transactions set product_id = 18 where transaction_id = 21;
 # update vehicle_expense_analytics.transactions set product_id = 17 where transaction_id = 3;
 # update vehicle_expense_analytics.vehicles set vehicle_cost = 100850 where vehicle_id = 1;
+# update vehicle_expense_analytics.transactions set transaction_date = "2025-01-05" where transaction_id = 224;
 
 # backup
 # mysqldump -h localhost -u root -p vehicle_expense_analytics > D:\Project\Vehicle-Data-Analysis\database_backup\vehicle_expense_analytics.sql

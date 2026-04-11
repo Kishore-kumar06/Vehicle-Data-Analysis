@@ -12,6 +12,7 @@ p.product_name,
 p.brand, 
 p.category, 
 p.is_fuel, 
+pm.payment,
 t.price, 
 t.quantity, 
 t.total_cost,
@@ -22,9 +23,11 @@ from vehicle_expense_analytics.transactions t
 left join vehicle_expense_analytics.users u on t.transaction_id = u.user_id
 left join vehicle_expense_analytics.vehicles v on t.vehicle_id = v.vehicle_id
 left join vehicle_expense_analytics.locations l on t.location_id = l.location_id
-left join vehicle_expense_analytics.products p on t.product_id = p.product_id;
+left join vehicle_expense_analytics.products p on t.product_id = p.product_id
+left join vehicle_expense_analytics.payment_mode pm on t.payment_id = pm.payment_id;
+
 # drop view v_bike_expenses_metrics;
-# select * from v_bike_expenses_metrics;
+select * from v_bike_expenses_metrics;
 
 select t.transaction_date, 
 monthname(t.transaction_date) as transaction_month, 
@@ -37,6 +40,7 @@ p.product_name,
 p.brand, 
 p.category, 
 p.is_fuel, 
+pm.payment,
 t.price, 
 t.quantity, 
 t.total_cost,
@@ -47,4 +51,5 @@ from vehicle_expense_analytics.transactions t
 left join vehicle_expense_analytics.users u on t.transaction_id = u.user_id
 left join vehicle_expense_analytics.vehicles v on t.vehicle_id = v.vehicle_id
 left join vehicle_expense_analytics.locations l on t.location_id = l.location_id
-left join vehicle_expense_analytics.products p on t.product_id = p.product_id;
+left join vehicle_expense_analytics.products p on t.product_id = p.product_id
+left join vehicle_expense_analytics.payment_mode pm on t.payment_id = pm.payment_id;
