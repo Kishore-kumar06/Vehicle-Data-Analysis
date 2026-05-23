@@ -8,6 +8,9 @@ SELECT schema_name FROM information_schema.schemata;
 # CREATE DATABASE bike_expense_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; Supports all languages, Avoids encoding issues
 use vehicle_expense_analytics;
 
+select count(brand) from products;
+
+
 # creating tables
 create table users (
 	user_id int primary key,

@@ -1,4 +1,4 @@
-date,payment
+transaction_date,payment_id
 2020-08-21,1
 2020-08-25,4
 2020-08-25,1
