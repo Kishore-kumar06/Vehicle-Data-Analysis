@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE_FUEL_PRICE_HISTORY = """
 CREATE TABLE IF NOT EXISTS fuel_price_history (
-    fuel_price_id    INT,
+    fuel_price_id    INT PRIMARY KEY,
     fuel_price       DECIMAL(8, 2),
     price_trend_date DATE
 );

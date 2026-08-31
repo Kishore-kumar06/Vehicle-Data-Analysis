@@ -135,6 +135,8 @@ select * from vehicle_expense_analytics.transactions where price < 0 or quantity
 # backup
 # mysqldump -h localhost -u root -p vehicle_expense_analytics > D:\Project\Vehicle-Data-Analysis\database_backup\vehicle_expense_analytics.sql
 
+
+
 # create index on transaction table
 create index idx_transaction_id on vehicle_expense_analytics.transactions(transaction_id);
 create index idx_transaction_date on vehicle_expense_analytics.transactions(transaction_date);

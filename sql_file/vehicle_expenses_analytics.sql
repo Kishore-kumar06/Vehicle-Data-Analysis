@@ -1,4 +1,5 @@
 # create important view
+use vehicle_expense_analytics;
 
 create view v_bike_expenses_metrics as 
 select t.transaction_date, 
@@ -27,7 +28,7 @@ left join vehicle_expense_analytics.products p on t.product_id = p.product_id
 left join vehicle_expense_analytics.payment_mode pm on t.payment_id = pm.payment_id;
 
 # drop view v_bike_expenses_metrics;
-select * from v_bike_expenses_metrics;
+select * from v_bike_expenses_metrics where transaction_year = 2021 limit 5;
 
 select t.transaction_date, 
 monthname(t.transaction_date) as transaction_month, 
