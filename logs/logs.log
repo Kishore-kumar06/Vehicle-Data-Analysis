@@ -1,0 +1,48 @@
+2026-09-03 10:55:14 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:55:15 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:43 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:44 | create_tables | INFO |  Table ready: users 
+
+2026-09-03 10:58:44 | create_tables | INFO |  Table ready: vehicles 
+
+2026-09-03 10:58:44 | create_tables | INFO |  Table ready: locations 
+
+2026-09-03 10:58:44 | create_tables | INFO |  Table ready: products 
+
+2026-09-03 10:58:44 | create_tables | INFO |  Table ready: fuel_price_history 
+
+2026-09-03 10:58:45 | create_tables | INFO |  Table ready: transactions 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: fuel_price_history 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: locations 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: products 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: transactions 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: users 
+
+2026-09-03 10:58:45 | create_tables | WARNING |  Unexpected table found: vehicles 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 10:58:45 | db_connection | INFO | Connected to MySQL database 
+
+2026-09-03 11:06:42 | create_tables | INFO | Connected to MySQL database 
+
+2026-09-03 11:06:42 | create_tables | ERROR | Error creating tables: Not all parameters were used in the SQL statement 
+
+2026-09-03 11:06:42 | create_tables | INFO | MySQL connection closed due to error. 
+

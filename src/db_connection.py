@@ -1,8 +1,8 @@
 import mysql.connector
 from src.db_config import Data_Cred
-from utils.logfiles import log_error
+from utils.logfiles import setup_logger
 
-log_error("db_connection")
+logger = setup_logger("db_connection")
 
 def get_connection():
     """Return an open MySQL connection."""
@@ -16,14 +16,9 @@ def get_connection():
                 auth_plugin=Data_Cred.AUTH_PLUGIN
             )
 
-        if connection.is_connected():
-            print("Connected to MySQL database")
-            return connection
+        return connection
     except mysql.connector.Error as err:
-        print(f"Error connecting to MySQL: {err}")
+        logger.error(f"Error connecting to MySQL: {err}")
         raise
-    finally:
-        if connection.is_connected():
-            connection.close()
-            print("MySQL connection closed")
+
     

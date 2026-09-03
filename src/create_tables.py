@@ -1,4 +1,7 @@
 from src.db_connection import get_connection
+from utils.logfiles import setup_logger
+
+logger = setup_logger("create_tables")
 
 
 # SQL to create each table
@@ -8,8 +11,10 @@ CREATE TABLE IF NOT EXISTS users (
     user_name VARCHAR(100) NOT NULL,
     email     VARCHAR(100),
     address   VARCHAR(100)
+    
 );
 """
+# # modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 
 CREATE_VEHICLES = """
 CREATE TABLE IF NOT EXISTS vehicles (
@@ -17,7 +22,8 @@ CREATE TABLE IF NOT EXISTS vehicles (
     vehicle_model VARCHAR(100) NOT NULL,
     brand         VARCHAR(100),
     engine_cc     INT,
-    purchase_date DATE
+    purchase_date DATE,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 """
 
@@ -28,7 +34,8 @@ CREATE TABLE IF NOT EXISTS locations (
     address       VARCHAR(100),
     city          VARCHAR(50),
     state         VARCHAR(50),
-    pin_code      int
+    pin_code      int,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 """
 
@@ -38,7 +45,8 @@ CREATE TABLE IF NOT EXISTS products (
     product_name VARCHAR(100) NOT NULL,
     category     VARCHAR(50),
     is_fuel      BIT,
-    is_service   BIT
+    is_service   BIT,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 """
 
@@ -46,7 +54,8 @@ CREATE_FUEL_PRICE_HISTORY = """
 CREATE TABLE IF NOT EXISTS fuel_price_history (
     fuel_price_id    INT PRIMARY KEY,
     fuel_price       DECIMAL(8, 2),
-    price_trend_date DATE
+    price_trend_date DATE,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 """
 
@@ -61,6 +70,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     quantity         DECIMAL(10, 2),
     total_cost       DECIMAL(10, 2),
     transaction_date DATE,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id)     REFERENCES users(user_id),
     FOREIGN KEY (vehicle_id)  REFERENCES vehicles(vehicle_id),
     FOREIGN KEY (location_id) REFERENCES locations(location_id),
@@ -79,16 +89,32 @@ ALL_TABLES = [
 
 
 def create_all_tables():
-    """Create all tables. Safe to run multiple times (IF NOT EXISTS)."""
-    connection = get_connection()
-    cursor = connection.cursor()
+    try:
+        tables_created = False
+        connection = get_connection()
+        if connection.is_connected():
+            logger.info("Connected to MySQL database")
+            cursor = connection.cursor()
 
-    for table_name, sql in ALL_TABLES:
-        cursor.execute(sql)
-        print(f"  Table ready: {table_name}")
+            for table_name, sql in ALL_TABLES:
+                cursor.execute(sql)
+                logger.info(f" Table ready: {table_name}")
 
-    connection.commit()
-    cursor.close()
-    connection.close()
-    print("All tables created successfully.")
+            connection.commit()
 
+            cursor.execute("SHOW TABLES")
+            tables = cursor.fetchall()
+            for table in tables:
+                if table in [t[0] for t in ALL_TABLES]:
+                    logger.info(f" Table {table[0]} created successfully.")
+                    tables_created = True  
+
+        cursor.close()
+        connection.close()
+
+    except Exception as e:
+        logger.error(f"Error creating tables: {e}")
+        if connection.is_connected():
+            connection.close()
+            logger.info("MySQL connection closed due to error.")
+    
